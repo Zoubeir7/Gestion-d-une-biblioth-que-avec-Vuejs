@@ -1,10 +1,27 @@
-// Importation de Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-// Importation de Bootstrap JS et Popper.js
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import '@fortawesome/fontawesome-free/css/all.css';
 
-import { createApp } from 'vue'
-import App from './App.vue'
 
-createApp(App).mount('#app')
+
+// import './assets/main.css'
+
+import { createApp } from 'vue';
+import App from './App.vue';
+
+import { routes } from './Route/Routes.js';
+import { createRouter, createWebHistory } from 'vue-router';
+
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+})
+
+
+const app = createApp(App);
+app.use(router);
+app.mount('#app');
+
+
+
