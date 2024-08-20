@@ -1,26 +1,12 @@
-<!-- Livres.vue -->
 <template>
-  <div class="container mt-5">
-    <h2>Gestion des Livres</h2>
-    <form @submit.prevent="ajouterLivre" class="mb-4">
-      <div class="form-group">
-        <input v-model="nouveauLivre.title" type="text" placeholder="Titre" class="form-control mt-2" required />
-      </div>
-      <div class="form-group">
-        <input v-model="nouveauLivre.author" type="text" placeholder="Auteur" class="form-control mt-2" required />
-      </div>
-      <div class="form-group">
-        <input v-model="nouveauLivre.date_publication" type="date" class="form-control mt-2" required />
-      </div>
-      <div class="form-group">
-        <input v-model="nouveauLivre.genre" type="text" placeholder="Genre" class="form-control mt-2" required />
-      </div>
-      <button type="submit" class="btn btn-primary mt-2">Ajouter Livre</button>
-    </form>
+  <div>
+    <h2>Liste des Livres</h2>
 
-    <hr />
+    <!-- Bouton pour ajouter un nouveau livre -->
+    <button @click="naviguerAjouterLivre" class="btn btn-success mb-3">
+      Ajouter un Livre
+    </button>
 
-    <h3>Liste des Livres</h3>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -39,46 +25,68 @@
           <td>{{ livre.genre }}</td>
           <td>
             <i @click="voirDetails(index)" class="fas fa-eye text-info" style="cursor: pointer; margin-right: 8px;"></i>
-            <i @click="modifierLivre(index)" class="fas fa-edit text-warning" style="cursor: pointer; margin-right: 8px;"></i>
+            <i @click="naviguerModifierLivre(index)" class="fas fa-edit text-warning" style="cursor: pointer; margin-right: 8px;"></i>
             <i @click="supprimerLivre(index)" class="fas fa-trash text-danger" style="cursor: pointer;"></i>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <!-- Afficher les détails du livre sous forme de tableau -->
+    <div v-if="livreSelectionne !== null" class="mt-4">
+      <h4>Détails du Livre</h4>
+      <table class="table table-primary table-borderless">
+        <tr>
+          <th>Titre</th>
+          <td>{{ livres[livreSelectionne].title }}</td>
+        </tr>
+        <tr>
+          <th>Auteur</th>
+          <td>{{ livres[livreSelectionne].author }}</td>
+        </tr>
+        <tr>
+          <th>Date de publication</th>
+          <td>{{ livres[livreSelectionne].date_publication }}</td>
+        </tr>
+        <tr>
+          <th>Genre</th>
+          <td>{{ livres[livreSelectionne].genre }}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
 const livres = ref([]);
-const nouveauLivre = ref({ title: '', author: '', date_publication: '', genre: '' });
+const livreSelectionne = ref(null);
+const router = useRouter();
 
 const chargerLivres = () => {
   const data = localStorage.getItem('livres');
   if (data) livres.value = JSON.parse(data);
 };
 
-const ajouterLivre = () => {
-  livres.value.push({ ...nouveauLivre.value });
-  localStorage.setItem('livres', JSON.stringify(livres.value));
-  nouveauLivre.value = { title: '', author: '', date_publication: '', genre: '' };
-};
-
 const supprimerLivre = (index) => {
   livres.value.splice(index, 1);
   localStorage.setItem('livres', JSON.stringify(livres.value));
+  livreSelectionne.value = null;
 };
 
 const voirDetails = (index) => {
-  alert(`Titre: ${livres.value[index].title}\nAuteur: ${livres.value[index].author}`);
-};
-const modifierLivre = (index) => {
-  nouveauLivre.value = { ...livres.value[index] };
-  livres.value.splice(index, 1); // Supprime le livre pour le mettre à jour
-  localStorage.setItem('livres', JSON.stringify(livres.value)); // Mise à jour du localStorage
+  livreSelectionne.value = index;
 };
 
+const naviguerAjouterLivre = () => {
+  router.push('/AjouterLivre');
+};
+
+const naviguerModifierLivre = (index) => {
+  router.push({ path: `/ModifierLivre/${index}` });
+};
 
 onMounted(chargerLivres);
 </script>

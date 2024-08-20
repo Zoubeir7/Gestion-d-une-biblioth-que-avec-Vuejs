@@ -40,6 +40,25 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Afficher les détails du prêt sous forme de tableau -->
+    <div v-if="pretSelectionne !== null" class="mt-4">
+      <h4>Détails du Prêt</h4>
+      <table class="table table-primary table-borderless">
+        <tr>
+          <th>Membre</th>
+          <td>{{ prets[pretSelectionne].membre }}</td>
+        </tr>
+        <tr>
+          <th>Livre</th>
+          <td>{{ prets[pretSelectionne].livre }}</td>
+        </tr>
+        <tr>
+          <th>Date</th>
+          <td>{{ prets[pretSelectionne].date }}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -48,6 +67,7 @@ import { ref, onMounted } from 'vue';
 
 const prets = ref([]);
 const nouveauPret = ref({ membre: '', livre: '', date: '' });
+const pretSelectionne = ref(null);
 
 const chargerPrets = () => {
   const data = localStorage.getItem('prets');
@@ -63,16 +83,18 @@ const ajouterPret = () => {
 const supprimerPrets = (index) => {
   prets.value.splice(index, 1);
   localStorage.setItem('prets', JSON.stringify(prets.value));
+  pretSelectionne.value = null; 
 };
 
 const voirDetails = (index) => {
-  alert(`Membre: ${prets.value[index].membre}\nLivre: ${prets.value[index].livre}\nDate: ${prets.value[index].date}`);
+  pretSelectionne.value = index;
 };
 
 const modifierPrets = (index) => {
   nouveauPret.value = { ...prets.value[index] };
-  prets.value.splice(index, 1); // Supprime le livre pour le mettre à jour
-  localStorage.setItem('prets', JSON.stringify(prets.value)); // Mise à jour du localStorage
+  prets.value.splice(index, 1); 
+  pretSelectionne.value = null; 
+  localStorage.setItem('prets', JSON.stringify(prets.value)); 
 };
 
 onMounted(chargerPrets);

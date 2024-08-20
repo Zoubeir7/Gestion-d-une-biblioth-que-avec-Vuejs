@@ -44,6 +44,25 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Afficher les détails du membre sous forme de tableau -->
+    <div v-if="membreSelectionne !== null" class="mt-4">
+      <h4>Détails du Membre</h4>
+      <table class="table table-primary table-borderless">
+        <tr>
+          <th>Nom</th>
+          <td>{{ membres[membreSelectionne].name }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{ membres[membreSelectionne].email }}</td>
+        </tr>
+        <tr>
+          <th>Genre</th>
+          <td>{{ membres[membreSelectionne].genre }}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -52,6 +71,7 @@ import { ref, onMounted } from 'vue';
 
 const membres = ref([]);
 const nouveauMembre = ref({ name: '', email: '', genre: '' });
+const membreSelectionne = ref(null);
 
 const chargerMembres = () => {
   const data = localStorage.getItem('membres');
@@ -67,14 +87,18 @@ const ajouterMembre = () => {
 const supprimerMembres = (index) => {
   membres.value.splice(index, 1);
   localStorage.setItem('membres', JSON.stringify(membres.value));
+  membreSelectionne.value = null;
 };
 
 const voirDetails = (index) => {
-  alert(`Nom: ${membres.value[index].name}\nEmail: ${membres.value[index].email}\nGenre: ${membres.value[index].genre}`);
+  membreSelectionne.value = index;
 };
+
 const modifierMembres = (index) => {
   nouveauMembre.value = { ...membres.value[index] };
   membres.value.splice(index, 1); 
+  membreSelectionne.value = null;
 };
+
 onMounted(chargerMembres);
 </script>
