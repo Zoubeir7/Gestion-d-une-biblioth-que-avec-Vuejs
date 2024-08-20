@@ -9,44 +9,43 @@ import AjouterPret from "@/components/Prets/AjouterPret.vue";
 import ModifierPret from "@/components/Prets/ModifierPret.vue";
 
 export const routes = [
-    {
-        path: '/Livre',
-        component: ListerLivre
-        
-       
-    },
-    {
-        path: '/AjouterLivre',
-        component: AjouterLivre
-      },
-      {
-        path: '/ModifierLivre/:index',
-        component: ModifierLivre
-      },
-    {
-        path: '/Membres',
-        component: ListeMembre
-    },
-    {
-        path: '/AjouterMembre',
-        component: AjouterMembre
-      },
-      {
-        path: '/ModifierMembre/:index',
-        component: ModifierMembre
-      },
-    {
-        path: '/Prets',
-        component: ListePret
-    },
-    {
-        path: '/AjouterPret',
-        component: AjouterPret
-      },
-      {
-        path: '/ModifierPret/:index',
-        component: ModifierPret,
-      }
+  {
+    path: '/Livre',
+    component: ListerLivre
+
+
+  },
+  {
+    path: '/AjouterLivre',
+    component: AjouterLivre
+  },
+  {
+    path: '/ModifierLivre/:index',
+    component: ModifierLivre
+  },
+  {
+    path: '/Membres',
+    component: ListeMembre
+  },
+  {
+    path: '/AjouterMembre',
+    component: AjouterMembre
+  },
+  {
+    path: '/ModifierMembre/:index',
+    component: ModifierMembre
+  },
+  {
+    path: '/Prets',
+    component: ListePret
+  },
+  {
+    path: '/AjouterPret',
+    component: AjouterPret
+  },
+  {
+    path: '/ModifierPret/:index',
+    component: ModifierPret,
+  }
 
 ];
-

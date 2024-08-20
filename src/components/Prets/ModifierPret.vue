@@ -1,42 +1,41 @@
 <template>
-    <div class="container mt-5">
-      <h2>Modifier Prêt</h2>
-      <form @submit.prevent="modifierPret" class="mb-4">
-        <div class="form-group">
-          <input v-model="pretModifie.membre" type="text" placeholder="Nom du membre" class="form-control mt-2" required />
-        </div>
-        <div class="form-group">
-          <input v-model="pretModifie.livre" type="text" placeholder="Titre du livre" class="form-control mt-2" required />
-        </div>
-        <div class="form-group">
-          <input v-model="pretModifie.date" type="date" class="form-control mt-2" required />
-        </div>
-        <button type="submit" class="btn btn-primary mt-4">Modifier Prêt</button>
-      </form>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
-  
-  const pretModifie = ref({ membre: '', livre: '', date: '' });
-  const route = useRoute();
-  const router = useRouter();
-  
-  const chargerPret = () => {
-    const prets = JSON.parse(localStorage.getItem('prets')) || [];
-    const index = route.params.index;
-    pretModifie.value = { ...prets[index], index };
-  };
-  
-  const modifierPret = () => {
-    const prets = JSON.parse(localStorage.getItem('prets')) || [];
-    prets[pretModifie.value.index] = { ...pretModifie.value };
-    localStorage.setItem('prets', JSON.stringify(prets));
-    router.push('/ListePrets'); // Redirection vers la liste des prêts après modification
-  };
-  
-  chargerPret();
-  </script>
-  
+  <div class="container mt-5">
+    <h2>Modifier Prêt</h2>
+    <form @submit.prevent="modifierPret" class="mb-4">
+      <div class="form-group">
+        <input v-model="pretModifie.membre" type="text" placeholder="Nom du membre" class="form-control mt-2" required />
+      </div>
+      <div class="form-group">
+        <input v-model="pretModifie.livre" type="text" placeholder="Titre du livre" class="form-control mt-2" required />
+      </div>
+      <div class="form-group">
+        <input v-model="pretModifie.date" type="date" class="form-control mt-2" required />
+      </div>
+      <button type="submit" class="btn btn-primary mt-4">Modifier Prêt</button>
+    </form>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const pretModifie = ref({ membre: '', livre: '', date: '' });
+const route = useRoute();
+const router = useRouter();
+
+const chargerPret = () => {
+  const prets = JSON.parse(localStorage.getItem('prets')) || [];
+  const index = route.params.index;
+  pretModifie.value = { ...prets[index], index };
+};
+
+const modifierPret = () => {
+  const prets = JSON.parse(localStorage.getItem('prets')) || [];
+  prets[pretModifie.value.index] = { ...pretModifie.value };
+  localStorage.setItem('prets', JSON.stringify(prets));
+  router.push('/ListePrets'); // Redirection vers la liste des prêts après modification
+};
+
+chargerPret();
+</script>
