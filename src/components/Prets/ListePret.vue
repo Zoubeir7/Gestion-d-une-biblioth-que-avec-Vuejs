@@ -1,23 +1,12 @@
-<!-- Prets.vue -->
 <template>
   <div class="container mt-5">
-    <h2>Gestion des Prêts</h2>
-    <form @submit.prevent="ajouterPret" class="mb-4">
-      <div class="form-group">
-        <input v-model="nouveauPret.membre" type="text" placeholder="Nom du membre" class="form-control mt-2" required />
-      </div>
-      <div class="form-group">
-        <input v-model="nouveauPret.livre" type="text" placeholder="Titre du livre" class="form-control mt-2" required />
-      </div>
-      <div class="form-group">
-        <input v-model="nouveauPret.date" type="date" class="form-control mt-2" required />
-      </div>
-      <button type="submit" class="btn btn-primary mt-2">Enregistrer Prêt</button>
-    </form>
+    <h2>Liste des Prêts</h2>
 
-    <hr />
+    <!-- Bouton pour ajouter un nouveau prêt -->
+    <button @click="naviguerAjouterPret" class="btn btn-success mb-3">
+      Ajouter un Prêt
+    </button>
 
-    <h3>Liste des Prêts</h3>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -34,8 +23,8 @@
           <td>{{ pret.date }}</td>
           <td>
             <i @click="voirDetails(index)" class="fas fa-eye text-info" style="cursor: pointer; margin-right: 8px;"></i>
-            <i @click="modifierPrets(index)" class="fas fa-edit text-warning" style="cursor: pointer; margin-right: 8px;"></i>
-            <i @click="supprimerPrets(index)" class="fas fa-trash text-danger" style="cursor: pointer;"></i>
+            <i @click="naviguerModifierPret(index)" class="fas fa-edit text-warning" style="cursor: pointer; margin-right: 8px;"></i>
+            <i @click="supprimerPret(index)" class="fas fa-trash text-danger" style="cursor: pointer;"></i>
           </td>
         </tr>
       </tbody>
@@ -64,37 +53,33 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
 const prets = ref([]);
-const nouveauPret = ref({ membre: '', livre: '', date: '' });
 const pretSelectionne = ref(null);
+const router = useRouter();
 
 const chargerPrets = () => {
   const data = localStorage.getItem('prets');
   if (data) prets.value = JSON.parse(data);
 };
 
-const ajouterPret = () => {
-  prets.value.push({ ...nouveauPret.value });
-  localStorage.setItem('prets', JSON.stringify(prets.value));
-  nouveauPret.value = { membre: '', livre: '', date: '' };
-};
-
-const supprimerPrets = (index) => {
+const supprimerPret = (index) => {
   prets.value.splice(index, 1);
   localStorage.setItem('prets', JSON.stringify(prets.value));
-  pretSelectionne.value = null; 
+  pretSelectionne.value = null;
 };
 
 const voirDetails = (index) => {
   pretSelectionne.value = index;
 };
 
-const modifierPrets = (index) => {
-  nouveauPret.value = { ...prets.value[index] };
-  prets.value.splice(index, 1); 
-  pretSelectionne.value = null; 
-  localStorage.setItem('prets', JSON.stringify(prets.value)); 
+const naviguerAjouterPret = () => {
+  router.push('/AjouterPret');
+};
+
+const naviguerModifierPret = (index) => {
+  router.push({ path: `/ModifierPret/${index}` });
 };
 
 onMounted(chargerPrets);

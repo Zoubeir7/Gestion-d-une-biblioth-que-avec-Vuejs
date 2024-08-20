@@ -1,27 +1,13 @@
-<!-- Membres.vue -->
+<!-- ListerMembres.vue -->
 <template>
   <div class="container mt-5">
-    <h2>Gestion des Membres</h2>
-    <form @submit.prevent="ajouterMembre" class="mb-4">
-      <div class="form-group">
-        <input v-model="nouveauMembre.name" type="text" placeholder="Nom" class="form-control mt-2" required />
-      </div>
-      <div class="form-group">
-        <input v-model="nouveauMembre.email" type="email" placeholder="Email" class="form-control mt-2" required />
-      </div>
-      <div class="form-group">
-        <select v-model="nouveauMembre.genre" class="form-control mt-2" required>
-          <option disabled value="">Sélectionnez le genre</option>
-          <option value="Homme">Homme</option>
-          <option value="Femme">Femme</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary mt-4">Ajouter Membre</button>
-    </form>
+    <h2>Liste des Membres</h2>
 
-    <hr />
+    <!-- Bouton pour ajouter un nouveau membre -->
+    <button @click="naviguerAjouterMembre" class="btn btn-success mb-3">
+      Ajouter un Membre
+    </button>
 
-    <h3>Liste des Membres</h3>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -38,8 +24,8 @@
           <td>{{ membre.genre }}</td>
           <td>
             <i @click="voirDetails(index)" class="fas fa-eye text-info" style="cursor: pointer; margin-right: 8px;"></i>
-            <i @click="modifierMembres(index)" class="fas fa-edit text-warning" style="cursor: pointer; margin-right: 8px;"></i>
-            <i @click="supprimerMembres(index)" class="fas fa-trash text-danger" style="cursor: pointer;"></i>
+            <i @click="naviguerModifierMembre(index)" class="fas fa-edit text-warning" style="cursor: pointer; margin-right: 8px;"></i>
+            <i @click="supprimerMembre(index)" class="fas fa-trash text-danger" style="cursor: pointer;"></i>
           </td>
         </tr>
       </tbody>
@@ -68,23 +54,18 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
 const membres = ref([]);
-const nouveauMembre = ref({ name: '', email: '', genre: '' });
 const membreSelectionne = ref(null);
+const router = useRouter();
 
 const chargerMembres = () => {
   const data = localStorage.getItem('membres');
   if (data) membres.value = JSON.parse(data);
 };
 
-const ajouterMembre = () => {
-  membres.value.push({ ...nouveauMembre.value });
-  localStorage.setItem('membres', JSON.stringify(membres.value));
-  nouveauMembre.value = { name: '', email: '', genre: '' };
-};
-
-const supprimerMembres = (index) => {
+const supprimerMembre = (index) => {
   membres.value.splice(index, 1);
   localStorage.setItem('membres', JSON.stringify(membres.value));
   membreSelectionne.value = null;
@@ -94,10 +75,12 @@ const voirDetails = (index) => {
   membreSelectionne.value = index;
 };
 
-const modifierMembres = (index) => {
-  nouveauMembre.value = { ...membres.value[index] };
-  membres.value.splice(index, 1); 
-  membreSelectionne.value = null;
+const naviguerAjouterMembre = () => {
+  router.push('/AjouterMembre');
+};
+
+const naviguerModifierMembre = (index) => {
+  router.push({ path: `/ModifierMembre/${index}` });
 };
 
 onMounted(chargerMembres);
