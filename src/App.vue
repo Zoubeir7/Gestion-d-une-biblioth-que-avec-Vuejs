@@ -15,6 +15,7 @@
         </button>
 
         <!-- Collapsible wrapper -->
+         <div class="container">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar brand -->
           <a class="navbar-brand mt-2 mt-lg-0" href="#">
@@ -31,17 +32,19 @@
               <RouterLink class="nav-link" to="/Livre">Livre</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/team">Membre</RouterLink>
+              <RouterLink class="nav-link" to="/Membres">Membres</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/projects">Préts</RouterLink>
+              <RouterLink class="nav-link" to="/Prets">Préts</RouterLink>
             </li>
           </ul>
         </div>
         </div>
+      </div>
     </nav>
 
 <RouterView />  
+
 <!-- <ListerLivre /> -->
 
 </template>
@@ -55,4 +58,40 @@ import ListerLivre from "./components/Livre/ListerLivre.vue";
 
 
 <style scoped>
+/* styles.css */
+body {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.container {
+  max-width: 900px;
+}
+
+.table {
+  border-radius: 0.25rem;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.form-control {
+  border-radius: 0.25rem;
+}
+
 </style>
