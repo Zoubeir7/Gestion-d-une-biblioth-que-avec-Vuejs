@@ -44,8 +44,8 @@
       </div>
     </nav>
 
-<RouterView />  
-
+<RouterView /> 
+<AjouterLivre /> 
 <!-- <ListerLivre /> -->
 
 </template>
@@ -54,6 +54,7 @@
 
 import { RouterLink, RouterView } from 'vue-router';
 import ListerLivre from "./components/Livre/ListerLivre.vue";
+import AjouterLivre from './components/Livre/AjouterLivre.vue';
 
 </script>
 
