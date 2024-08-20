@@ -16,7 +16,8 @@
           <option value="Femme">Femme</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary mt-4">Ajouter Membre</button>
+      <button @click="naviguerListeMembre" class="btn btn-success mb-3">Enregistrer</button>
+      
     </form>
   </div>
 </template>
@@ -33,6 +34,6 @@ const ajouterMembre = () => {
   membres.push({ ...nouveauMembre.value });
   localStorage.setItem('membres', JSON.stringify(membres));
   nouveauMembre.value = { name: '', email: '', genre: '' };
-  router.push('/ListeMembres'); // Redirection vers la liste des membres après ajout
+  router.push('/Membres'); // Redirection vers la liste des membres après ajout
 };
 </script>

@@ -14,7 +14,7 @@
       <div class="form-group">
         <input v-model="nouveauLivre.genre" type="text" placeholder="Genre" class="form-control mt-2" required />
       </div>
-      <button type="submit" class="btn btn-success mt-2">Ajouter Livre</button>
+      <button @click="naviguerListerLivre" class="btn btn-success mb-3">Enregistrer</button>
     </form>
   </div>
 </template>

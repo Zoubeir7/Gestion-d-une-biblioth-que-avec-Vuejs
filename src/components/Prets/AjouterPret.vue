@@ -11,7 +11,8 @@
       <div class="form-group">
         <input v-model="nouveauPret.date" type="date" class="form-control mt-2" required />
       </div>
-      <button type="submit" class="btn btn-primary mt-4">Ajouter Prêt</button>
+      <button @click="naviguerListePret" class="btn btn-success mb-3">Enregistrer</button>
+      
     </form>
   </div>
 </template>
@@ -28,6 +29,6 @@ const ajouterPret = () => {
   prets.push({ ...nouveauPret.value });
   localStorage.setItem('prets', JSON.stringify(prets));
   nouveauPret.value = { membre: '', livre: '', date: '' };
-  router.push('/ListePrets'); // Redirection vers la liste des prêts après ajout
+  router.push('/Prets'); // Redirection vers la liste des prêts après ajout
 };
 </script>

@@ -34,7 +34,7 @@ const modifierPret = () => {
   const prets = JSON.parse(localStorage.getItem('prets')) || [];
   prets[pretModifie.value.index] = { ...pretModifie.value };
   localStorage.setItem('prets', JSON.stringify(prets));
-  router.push('/ListePrets'); // Redirection vers la liste des prêts après modification
+  router.push('/Prets'); // Redirection vers la liste des prêts après modification
 };
 
 chargerPret();

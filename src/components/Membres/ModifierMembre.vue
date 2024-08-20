@@ -39,7 +39,7 @@ const modifierMembre = () => {
   const membres = JSON.parse(localStorage.getItem('membres')) || [];
   membres[membreModifie.value.index] = { ...membreModifie.value };
   localStorage.setItem('membres', JSON.stringify(membres));
-  router.push('/ListeMembres'); // Redirection vers la liste des membres après modification
+  router.push('/Membres'); // Redirection vers la liste des membres après modification
 };
 
 chargerMembre();
