@@ -10,8 +10,7 @@
       <button
         class="navbar-toggler"
         type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
+        @click="toggleNavbar"
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
@@ -20,7 +19,7 @@
       </button>
 
       <!-- Collapsible content -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div :class="['collapse', 'navbar-collapse', { show: isNavbarVisible }]" id="navbarSupportedContent">
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -69,7 +68,14 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { RouterLink, RouterView } from 'vue-router';
+
+const isNavbarVisible = ref(false);
+
+function toggleNavbar() {
+  isNavbarVisible.value = !isNavbarVisible.value;
+}
 </script>
 
 <style scoped>
