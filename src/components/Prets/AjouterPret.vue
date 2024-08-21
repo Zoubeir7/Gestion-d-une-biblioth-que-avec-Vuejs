@@ -11,8 +11,10 @@
       <div class="form-group">
         <input v-model="nouveauPret.date" type="date" class="form-control mt-2" required />
       </div>
-      <button @click="naviguerListePret" class="btn btn-success mb-3">Enregistrer</button>
-      
+      <div class="d-flex justify-content-between">
+        <button @click="ajouterPret" class="btn btn-success mt-2">Enregistrer</button>
+        <button @click="annuler" type="button" class="btn btn-secondary mt-2">Annuler</button>
+      </div>
     </form>
   </div>
 </template>
@@ -30,5 +32,9 @@ const ajouterPret = () => {
   localStorage.setItem('prets', JSON.stringify(prets));
   nouveauPret.value = { membre: '', livre: '', date: '' };
   router.push('/Prets'); // Redirection vers la liste des prêts après ajout
+};
+
+const annuler = () => {
+  router.push('/Prets'); // Redirection vers la liste des prêts sans enregistrer
 };
 </script>

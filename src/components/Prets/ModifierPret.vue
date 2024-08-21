@@ -11,7 +11,10 @@
       <div class="form-group">
         <input v-model="pretModifie.date" type="date" class="form-control mt-2" required />
       </div>
-      <button type="submit" class="btn btn-primary mt-4">Modifier Prêt</button>
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-warning mt-2">Modifier Prêt</button>
+        <button @click="annuler" type="button" class="btn btn-secondary mt-2">Annuler</button>
+      </div>
     </form>
   </div>
 </template>
@@ -35,6 +38,10 @@ const modifierPret = () => {
   prets[pretModifie.value.index] = { ...pretModifie.value };
   localStorage.setItem('prets', JSON.stringify(prets));
   router.push('/Prets'); // Redirection vers la liste des prêts après modification
+};
+
+const annuler = () => {
+  router.push('/Prets'); // Redirection vers la liste des prêts sans enregistrer les modifications
 };
 
 chargerPret();

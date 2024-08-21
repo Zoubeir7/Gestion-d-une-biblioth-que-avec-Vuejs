@@ -14,7 +14,10 @@
       <div class="form-group">
         <input v-model="livreSelectionne.genre" type="text" placeholder="Genre" class="form-control mt-2" required />
       </div>
-      <button type="submit" class="btn btn-warning mt-2">Modifier Livre</button>
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-warning mt-2">Modifier Livre</button>
+        <button @click="annuler" type="button" class="btn btn-secondary mt-2">Annuler</button>
+      </div>
     </form>
   </div>
 </template>
@@ -39,6 +42,10 @@ const modifierLivre = () => {
   livres[index] = { ...livreSelectionne.value };
   localStorage.setItem('livres', JSON.stringify(livres));
   router.push('/Livre'); // Redirection vers la liste des livres après modification
+};
+
+const annuler = () => {
+  router.push('/Livre'); // Redirection vers la liste des livres sans enregistrer les modifications
 };
 
 onMounted(chargerLivre);

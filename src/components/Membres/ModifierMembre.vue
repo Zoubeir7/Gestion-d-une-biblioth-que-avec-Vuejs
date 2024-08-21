@@ -1,4 +1,3 @@
-<!-- ModifierMembre.vue -->
 <template>
   <div class="container mt-5">
     <h2>Modifier Membre</h2>
@@ -16,7 +15,10 @@
           <option value="Femme">Femme</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary mt-4">Modifier Membre</button>
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-warning mt-2">Modifier Membre</button>
+        <button @click="annuler" type="button" class="btn btn-secondary mt-2">Annuler</button>
+      </div>
     </form>
   </div>
 </template>
@@ -40,6 +42,10 @@ const modifierMembre = () => {
   membres[membreModifie.value.index] = { ...membreModifie.value };
   localStorage.setItem('membres', JSON.stringify(membres));
   router.push('/Membres'); // Redirection vers la liste des membres après modification
+};
+
+const annuler = () => {
+  router.push('/Membres'); // Redirection vers la liste des membres sans enregistrer les modifications
 };
 
 chargerMembre();

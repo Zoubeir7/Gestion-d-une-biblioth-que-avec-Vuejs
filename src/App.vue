@@ -15,7 +15,7 @@
        </button>
 
        <!-- Collapsible wrapper -->
-        <div class="container">
+        <div class="container bg-primary">
        <div class="collapse navbar-collapse" id="navbarSupportedContent">
          <!-- Navbar brand -->
          <a class="navbar-brand mt-2 mt-lg-0" href="#">
@@ -27,7 +27,7 @@
            />
          </a>
          <!-- Left links -->
-         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
            <li class="nav-item">
              <RouterLink class="nav-link" to="/Livre">Livre</RouterLink>
            </li>

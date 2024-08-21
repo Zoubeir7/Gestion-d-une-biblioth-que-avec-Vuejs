@@ -1,4 +1,3 @@
-<!-- AjouterMembre.vue -->
 <template>
   <div class="container mt-5">
     <h2>Ajouter un Nouveau Membre</h2>
@@ -16,8 +15,10 @@
           <option value="Femme">Femme</option>
         </select>
       </div>
-      <button @click="naviguerListeMembre" class="btn btn-success mb-3">Enregistrer</button>
-      
+      <div class="d-flex justify-content-between">
+        <button @click="ajouterMembre" class="btn btn-success mt-2">Enregistrer</button>
+        <button @click="annuler" type="button" class="btn btn-secondary mt-2">Annuler</button>
+      </div>
     </form>
   </div>
 </template>
@@ -35,5 +36,9 @@ const ajouterMembre = () => {
   localStorage.setItem('membres', JSON.stringify(membres));
   nouveauMembre.value = { name: '', email: '', genre: '' };
   router.push('/Membres'); // Redirection vers la liste des membres après ajout
+};
+
+const annuler = () => {
+  router.push('/Membres'); // Redirection vers la liste des membres sans enregistrer
 };
 </script>
