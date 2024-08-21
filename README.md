@@ -7,8 +7,6 @@ Cette application de gestion de bibliothèque est conçue pour faciliter la gest
 
 ## Fonctionnalités principales
 
-## Fonctionnalités principales
-
 - **Gestion des livres** : 
   - Ajouter, modifier et supprimer des livres.
   - Chaque livre contient des informations détaillées telles que le titre, l'auteur et la disponibilité.
