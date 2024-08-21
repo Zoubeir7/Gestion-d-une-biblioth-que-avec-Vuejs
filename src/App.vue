@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
-     <div class="container-fluid">
+     <div class="container-fluid ">
        <!-- Toggle button -->
        <button
          data-mdb-collapse-init
@@ -16,7 +16,7 @@
 
        <!-- Collapsible wrapper -->
         <div class="container bg-primary">
-       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <div class="collapse navbar-collapse " id="navbarSupportedContent ">
          <!-- Navbar brand -->
          <a class="navbar-brand mt-2 mt-lg-0" href="#">
            <img
@@ -28,14 +28,14 @@
          </a>
          <!-- Left links -->
          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-           <li class="nav-item">
+           <li class="nav-item fw-bold">
              <RouterLink class="nav-link" to="/Livre">Livre</RouterLink>
            </li>
            
-           <li class="nav-item">
+           <li class="nav-item fw-bold ">
              <RouterLink class="nav-link" to="/Membres">Membres</RouterLink>
            </li>
-           <li class="nav-item">
+           <li class="nav-item fw-bold">
              <RouterLink class="nav-link" to="/Prets">Préts</RouterLink>
            </li>
          </ul>

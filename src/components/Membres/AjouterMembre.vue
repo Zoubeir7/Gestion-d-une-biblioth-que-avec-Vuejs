@@ -31,10 +31,17 @@ const nouveauMembre = ref({ name: '', email: '', genre: '' });
 const router = useRouter();
 
 const ajouterMembre = () => {
+  // Vérifie si tous les champs sont remplis
+  if (!nouveauMembre.value.name || !nouveauMembre.value.email || !nouveauMembre.value.genre) {
+    alert('Veuillez remplir tous les champs');
+    return; // Arrête la fonction si un champ est vide
+  }
+
+  // Si tous les champs sont remplis, continue avec l'ajout
   const membres = JSON.parse(localStorage.getItem('membres')) || [];
   membres.push({ ...nouveauMembre.value });
   localStorage.setItem('membres', JSON.stringify(membres));
-  nouveauMembre.value = { name: '', email: '', genre: '' };
+  nouveauMembre.value = { name: '', email: '', genre: '' }; // Réinitialiser les champs
   router.push('/Membres'); // Redirection vers la liste des membres après ajout
 };
 

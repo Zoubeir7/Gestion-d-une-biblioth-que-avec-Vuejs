@@ -32,15 +32,18 @@ const router = useRouter();
 
 const chargerLivre = () => {
   const livres = JSON.parse(localStorage.getItem('livres')) || [];
-  const index = route.params.index;
-  livreSelectionne.value = { ...livres[index] };
+  const id = route.params.id; // Utilise l'ID du livre
+  livreSelectionne.value = livres.find(livre => livre.id === id) || null;
 };
 
 const modifierLivre = () => {
   const livres = JSON.parse(localStorage.getItem('livres')) || [];
-  const index = route.params.index;
-  livres[index] = { ...livreSelectionne.value };
-  localStorage.setItem('livres', JSON.stringify(livres));
+  const id = route.params.id;
+  const index = livres.findIndex(livre => livre.id === id);
+  if (index !== -1) {
+    livres[index] = { ...livreSelectionne.value };
+    localStorage.setItem('livres', JSON.stringify(livres));
+  }
   router.push('/Livre'); // Redirection vers la liste des livres après modification
 };
 
