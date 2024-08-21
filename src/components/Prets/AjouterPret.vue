@@ -27,10 +27,17 @@ const nouveauPret = ref({ membre: '', livre: '', date: '' });
 const router = useRouter();
 
 const ajouterPret = () => {
+  // Vérifie si tous les champs sont remplis
+  if (!nouveauPret.value.membre || !nouveauPret.value.livre || !nouveauPret.value.date) {
+    alert('Veuillez remplir tous les champs');
+    return; // Arrête la fonction si un champ est vide
+  }
+
+  // Si tous les champs sont remplis, continue avec l'ajout
   const prets = JSON.parse(localStorage.getItem('prets')) || [];
   prets.push({ ...nouveauPret.value });
   localStorage.setItem('prets', JSON.stringify(prets));
-  nouveauPret.value = { membre: '', livre: '', date: '' };
+  nouveauPret.value = { membre: '', livre: '', date: '' }; // Réinitialiser les champs
   router.push('/Prets'); // Redirection vers la liste des prêts après ajout
 };
 
