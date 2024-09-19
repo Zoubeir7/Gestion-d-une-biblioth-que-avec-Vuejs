@@ -1,51 +1,66 @@
-import ListerLivre from "@/components/Livre/ListerLivre.vue";
-import AjouterLivre from "@/components/Livre/AjouterLivre.vue";
-import ModifierLivre from "@/components/Livre/ModifierLivre.vue";
-import AjouterMembre from "@/components/Membres/AjouterMembre.vue";
-import ModifierMembre from "@/components/Membres/ModifierMembre.vue";
-import ListeMembre from "@/components/Membres/ListeMembre.vue";
-import ListePret from "@/components/Prets/ListePret.vue";
-import AjouterPret from "@/components/Prets/AjouterPret.vue";
-import ModifierPret from "@/components/Prets/ModifierPret.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import ListCustomer from "@/components/Customer/ListCustomers.vue";
+import CustomerAdd from "@/components/Customer/AddCustomer.vue";
+import EditCustomer from "@/components/Customer/EditCustomer.vue";
+import CustomerDetail from "@/components/Customer/CustomerDetail.vue";
+import ListOrders from "@/components/Orders/ListOrders.vue";
+import EditOrder from "@/components/Orders/EditOrder.vue";
+import AddOrder from "@/components/Orders/AddOrder.vue";
+import OrderDetail from "@/components/Orders/OrderDetail.vue";
+import ListProduct from "@/components/Products/ListProduct.vue";
+import EditProduct from "@/components/Products/EditProduct.vue";
+import AddProduct from "@/components/Products/ProductAdd.vue";
+import ProductDetail from "@/components/Products/ProductDetail.vue";
 
 export const routes = [
   {
-    path: '/Livre',
-    component: ListerLivre
-
-
+    path: '/Customer',
+    component: ListCustomer
   },
   {
-    path: '/AjouterLivre',
-    component: AjouterLivre
+    path: '/AddCustomer',
+    component: CustomerAdd
   },
   {
-    path: '/ModifierLivre/:index',
-    component: ModifierLivre
+    path: '/EditCustomer/:id',
+    component: EditCustomer
   },
   {
-    path: '/Membres',
-    component: ListeMembre
+    path: '/CustomerDetail/:id',
+    component: CustomerDetail
+  },
+  { 
+    path: "/Orders", 
+    component: ListOrders 
+  },
+  { 
+    path: "/AddOrder", 
+    component: AddOrder 
+  },
+  { 
+    path: "/EditOrder/:id", 
+    component: EditOrder 
   },
   {
-    path: '/AjouterMembre',
-    component: AjouterMembre
+    path: '/OrderDetail/:id',
+    component: OrderDetail
+  },
+  { 
+    path: "/Products", 
+    component: ListProduct 
   },
   {
-    path: '/ModifierMembre/:index',
-    component: ModifierMembre
+    path: '/AddProduct',
+    component: AddProduct
   },
   {
-    path: '/Prets',
-    component: ListePret
+    path: '/EditProduct/:id',
+    component: EditProduct
   },
   {
-    path: '/AjouterPret',
-    component: AjouterPret
+    path: '/ProductDetail/:id',
+    component: ProductDetail
   },
-  {
-    path: '/ModifierPret/:index',
-    component: ModifierPret,
-  }
-
 ];
+
+
